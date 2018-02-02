@@ -1,0 +1,8 @@
+<div id="messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+  <div *ngFor="let message of messages">
+    <p>{{message}}</p>
+  </div>
+</div>
+<div id="chat-box">
+  <input #chatBox (keyup.enter)="sendMessage(chatBox.value); chatBox.value = ''">
+</div>

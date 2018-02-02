@@ -1,0 +1,94 @@
+:host {
+    height: 50vh;
+    display: block;
+    padding:5px;
+    margin:2px;
+    background-color: black;
+    color: white;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+}
+$card-height: -117px;
+$card-width: -81px;
+$heart: 0px;
+$diamond: $card-height;
+$club: $card-height * 2 - 1px;
+$spade: $card-height * 3 - 1px;
+$two: 0px;
+$three: $card-width;
+$four: $card-width * 2;
+$five: $card-width * 3;
+$six: $card-width * 4;
+$seven: $card-width * 5;
+$eight: $card-width * 6;
+$nine: $card-width * 7;
+$ten: $card-width * 8;
+$jack: $card-width * 9;
+$queen: $card-width * 10;
+$king: $card-width * 11;
+$ace: $card-width * 12;
+
+
+%card-base {
+    width: 81px;
+    height: 117px;
+}
+
+.card {
+    @extend %card-base;
+    background: url('/assets/cards.gif');
+    float:left;
+}
+
+.heart {
+    background-position-y: $heart;
+}
+.diamond {
+    background-position-y: $diamond;
+}
+.club {
+    background-position-y: $club;
+}
+.spade {
+    background-position-y: $spade;
+}
+.two {
+    background-position-x: $two;
+}
+.three {
+    background-position-x: $three;
+}
+.four {
+    background-position-x: $four;
+}
+.five {
+    background-position-x: $five;
+}
+.six {
+    background-position-x: $six;
+}
+.seven {
+    background-position-x: $seven;
+}
+.eight {
+    background-position-x: $eight;
+}
+.nine {
+    background-position-x: $nine;
+}
+.ten {
+    background-position-x: $ten;
+}
+.jack {
+    background-position-x: $jack;
+}
+.queen {
+    background-position-x: $queen;
+}
+.king {
+    background-position-x: $king;
+}
+.ace {
+    background-position-x: $ace;
+}
