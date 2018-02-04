@@ -1,19 +1,19 @@
 <div class="container">
  <div class="row">
   <div class="col">
-   <div *ngFor="let card of cards; let i = index" [attr.data-index]="i" class="card {{card?.name}} {{card?.suite}} {{'card-'+i}}"></div>
+   <div *ngFor="let card of data?.cards; let i = index" [attr.data-index]="i" class="card {{card?.name}} {{card?.suite}} {{'card-'+i}}"></div>
   </div>
   <div class="col">
-   <div *ngFor="let card of cards" class="card {{card?.name}} {{card?.suite}}"></div>
+   <div *ngFor="let card of data?.cards" class="card {{card?.name}} {{card?.suite}}"></div>
   </div>
   <div class="col">
-   <div *ngFor="let card of cards" class="card {{card?.name}} {{card?.suite}}"></div>
+   <div *ngFor="let card of data?.cards" class="card {{card?.name}} {{card?.suite}}"></div>
   </div>
   <div class="col">
-   <div *ngFor="let card of cards" class="card {{card?.name}} {{card?.suite}}"></div>
+   <div *ngFor="let card of data?.cards" class="card {{card?.name}} {{card?.suite}}"></div>
   </div>
   <div class="col">
-   <div *ngFor="let card of cards" class="card {{card?.name}} {{card?.suite}}"></div>
+   <div *ngFor="let card of data?.cards" class="card {{card?.name}} {{card?.suite}}"></div>
   </div>
  </div>
 </div>

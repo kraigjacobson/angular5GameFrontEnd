@@ -8,18 +8,14 @@ import { SocketService } from '../socket.service';
 })
 export class ViewComponent implements OnInit {
   connection;
-  players;
-  dealer;
-  table;
+  data;
 
   constructor(private socketService: SocketService) { }
 
   ngOnInit() {
     this.connection = this.socketService.getDataUpdate().subscribe(data => {
-      this.players = data.players;
-      this.dealer = data.dealer;
-      this.table = data.table;
-    })
+      this.data = data;
+    });
   }
   onClickReady() {
     this.socketService.sendReady();
