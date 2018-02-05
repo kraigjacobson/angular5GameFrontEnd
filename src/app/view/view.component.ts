@@ -8,15 +8,38 @@ import {SocketService} from '../socket.service';
 })
 export class ViewComponent implements OnInit {
     connection;
-    // data = {'players': {'username': 'kraig', 'money': 100}, 'dealer': {}, 'table': {'one': 'kraig', 'two': null}};
-    data;
+    buttonConnection;
+    dealer;
+    players = [];
+    buttons = {
+        'ready':false,
+        'hit':false,
+        'stay':false,
+        'double':false,
+        'split':false
+    };
+
     constructor(private socketService: SocketService) {
     }
 
     ngOnInit() {
         this.connection = this.socketService.getDataUpdate().subscribe(data => {
-            this.data = data;
             console.log(data);
+            this.dealer = null;
+            this.players = [];
+            for (let i = 0; i < data.players.length; i++) {
+                if (data.players[i]) {
+                    this.players.push(data.players[i]);
+                }
+            }
+            this.dealer = data.dealer;
+        });
+
+        this.buttonConnection = this.socketService.getButtonUpdate().subscribe(data => {
+            console.log('buttonupdate', data);
+            for (let i = 0; i < data.length; i++) {
+                this.buttons[data[i].button] = data[i].condition;
+            }
         });
     }
 

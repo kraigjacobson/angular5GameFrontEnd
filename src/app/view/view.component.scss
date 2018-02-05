@@ -1,5 +1,5 @@
 :host {
-    height: 50vh;
+    height: 65vh;
     display: block;
     padding:5px;
     margin:2px;
@@ -29,6 +29,9 @@ $queen: $card-width * 10;
 $king: $card-width * 11;
 $ace: $card-width * 12;
 
+#view {
+    height:50vh;
+}
 
 %card-base {
     width: 81px;
@@ -95,6 +98,48 @@ $ace: $card-width * 12;
 .card-1 {
     left: -50px;
 }
+.card-2 {
+    left: -100px;
+}
+.card-3 {
+    left: -150px;
+}
+.card-4 {
+    left: -200px;
+}
+.card-5 {
+    left: -390px;
+    bottom: -60px;
+}
+.card-6 {
+    left: -435px;
+    bottom: -60px;
+}
+.card-7 {
+    left: -480px;
+    bottom: -60px;
+}
+.card-8 {
+    left: -515px;
+    bottom: -60px;
+}
+.card-9 {
+    left: -550px;
+    bottom: -60px;
+}
+.card-10 {
+    left: -585px;
+    bottom: -60px;
+}
+.card-11 {
+    left: -530px;
+    bottom: -60px;
+}
 #buttons {
-    margin-top: 15px;
+    position: relative;
+    bottom: 0;
+    right: 0;
+}
+#bet {
+    margin-bottom:5px;
 }
