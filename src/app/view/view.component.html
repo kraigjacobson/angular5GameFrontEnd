@@ -1,22 +1,22 @@
 <div class="container">
- <div class="row">
-  <div class="col">
-   <div *ngFor="let card of data?.cards; let i = index" [attr.data-index]="i" class="card {{card?.name}} {{card?.suite}} {{'card-'+i}}"></div>
-  </div>
-  <div class="col">
-   <div *ngFor="let card of data?.cards" class="card {{card?.name}} {{card?.suite}}"></div>
-  </div>
-  <div class="col">
-   <div *ngFor="let card of data?.cards" class="card {{card?.name}} {{card?.suite}}"></div>
-  </div>
-  <div class="col">
-   <div *ngFor="let card of data?.cards" class="card {{card?.name}} {{card?.suite}}"></div>
-  </div>
-  <div class="col">
-   <div *ngFor="let card of data?.cards" class="card {{card?.name}} {{card?.suite}}"></div>
-  </div>
- </div>
+    <div class="row">
+        <h1>Dealer {{data?.dealer.count}}</h1>
+        <div *ngFor="let card of data?.dealer.hand; let j = index" [attr.data-index]="j"
+             class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
+    </div>
+    <div class="row">
+        <div *ngFor="let player of data?.players; let i = index" class="col">
+            <h1>{{player.username}} {{player.count}}</h1>
+
+            <div *ngFor="let card of player.hand; let j = index" [attr.data-index]="j"
+                 class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
+        </div>
+    </div>
 </div>
 <div id="buttons">
- <button (click)="onClickReady()">Ready</button>
+    <button (click)="onClickReady()">Ready</button>
+    <button (click)="onClickHit()">Hit</button>
+    <button (click)="onClickStay()">Stay</button>
+    <button (click)="onClickDouble()">Double Down</button>
+    <button (click)="onClickSplit()">Split</button>
 </div>
