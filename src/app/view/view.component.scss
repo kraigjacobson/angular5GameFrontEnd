@@ -33,6 +33,12 @@ $ace: $card-width * 12;
     height:50vh;
 }
 
+.alert {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
 %card-base {
     width: 81px;
     height: 117px;
@@ -43,6 +49,15 @@ $ace: $card-width * 12;
     background: url('/assets/cards.gif');
     float:left;
 }
+input {
+    text-align: center;
+    width:70px;
+}
+input[type=number]::-webkit-inner-spin-button,
+ input[type=number]::-webkit-outer-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+ }
 
 .heart {
     background-position-y: $heart;

@@ -1,4 +1,6 @@
 <div class="container">
-  <app-view></app-view>
-  <app-comm></app-comm>
+  <!--<h1 class="text-center">Kraig's Casino</h1>-->
+  <app-view *ngIf="loggedIn"></app-view>
+  <app-comm *ngIf="loggedIn"></app-comm>
+  <app-login (authorized)="authorized($event)" *ngIf="!loggedIn"></app-login>
 </div>

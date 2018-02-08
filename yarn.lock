@@ -799,7 +799,7 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bootstrap@^4.0.0-beta.2:
+bootstrap@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0.tgz#ceb03842c145fcc1b9b4e15da2a05656ba68469a"
 
@@ -4453,6 +4453,14 @@ netmask@~1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/netmask/-/netmask-1.0.6.tgz#20297e89d86f6f6400f250d9f4f6b4c1945fcd35"
 
+ng2-alert-center@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/ng2-alert-center/-/ng2-alert-center-0.5.1.tgz#54f546e34b12a1ff36d78781042d612638e7aac1"
+
+ngx-cookie-service@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-1.0.10.tgz#dc17ff4f1a0224cf3b0c7a7f52bff2b798396e3d"
+
 no-case@^2.2.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
@@ -6308,7 +6316,7 @@ socket.io-parser@~3.1.1:
     has-binary2 "~1.0.2"
     isarray "2.0.1"
 
-socket.io@2.0.4:
+socket.io@2.0.4, socket.io@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/socket.io/-/socket.io-2.0.4.tgz#c1a4590ceff87ecf13c72652f046f716b29e6014"
   dependencies:
