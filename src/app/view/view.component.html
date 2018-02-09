@@ -15,12 +15,14 @@
                 <div *ngFor="let card of dealer?.hand; let j = index" [attr.data-index]="j"
                      class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
             </div>
-            <div class="row">
-                <h1>{{player?.username}} {{player?.count}}</h1>
-            </div>
-            <div class="row">
-                <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
-                     class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
+            <div [ngClass]="{'turn': player?.turn }">
+                <div class="row">
+                    <h1>{{player?.username}} {{player?.count}} turn: </h1>
+                </div>
+                <div class="row">
+                    <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
+                         class="card {{card?.name}} {{card?.suite}}"></div>
+                </div>
             </div>
             <div class="row">
                 <h3>Cash: ${{player?.money}}</h3>
@@ -28,19 +30,21 @@
         </div>
         <div class="col-6">
             <div *ngFor="let player of players; let i = index" class="col">
-                <div class="row">
-                    <h1>{{player?.username}} {{player?.count}}</h1>
-                </div>
-                <div class="row">
-                    <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
-                         class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
-                    <h3>Cash: ${{player?.money}}</h3>
+                <div [ngClass]="{'turn': player?.turn }">
+                    <div class="row">
+                        <h1>{{player?.username}} {{player?.count}} turn: {{player?.turn}}</h1>
+                    </div>
+                    <div class="row">
+                        <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
+                             class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
+                        <h3>Cash: ${{player?.money}}</h3>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="bet">
+<div *ngIf="!activePlay" id="bet">
     <button (click)="onDecreaseBet()">-</button>
     <input [(ngModel)]="bet" type="number">
     <button (click)="onIncreaseBet()">+</button>

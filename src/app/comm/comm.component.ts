@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SocketService } from '../socket.service';
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-comm',
@@ -10,7 +11,7 @@ export class CommComponent implements OnInit, OnDestroy {
   messages = [];
   connection;
   message;
-  constructor(private socketService: SocketService) { }
+  constructor(private socketService: SocketService, private userService: UserService) { }
 
   sendMessage(message: string) {
     this.message = message;
@@ -18,9 +19,12 @@ export class CommComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.connection = this.socketService.getMessages().subscribe(message => {
-      this.messages.push(message);
-    })
+    console.log('1');
+    this.userService.getSession().do(() => {
+      this.connection = this.socketService.getMessages().subscribe(message => {
+        this.messages.push(message);
+      })
+    });
   }
 
   ngOnDestroy() {

@@ -8,19 +8,21 @@ import {CookieService} from "ngx-cookie-service";
 
 export class SocketService {
     private url = `http://${window.location.hostname}:3000`;
-    private socket;
+    public socket;
     public token;
 
     constructor(private cookieService: CookieService) {
+
+    }
+
+    connect() {
         if (!this.socket) {
             let query = 'token=' + this.cookieService.get('token');
-            console.log(query);
             this.socket = io(this.url, {
                 query: query
             });
         }
     }
-
 
     sendMessage(message) {
         this.socket.emit('message', message);
