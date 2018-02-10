@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {SocketService} from '../socket.service';
-import {Alert, AlertCenterService, AlertType} from "ng2-alert-center";
-import {UserService} from "../user.service";
+import {Alert, AlertCenterService, AlertType} from 'ng2-alert-center';
+import {UserService} from '../user.service';
+import {CapitalizePipe} from '../pipes/capitalize.pipe';
 
 @Component({
     selector: 'app-view',
@@ -18,11 +19,11 @@ export class ViewComponent implements OnInit {
     player;
     players = [];
     buttons = {
-        'ready':false,
-        'hit':false,
-        'stay':false,
-        'double':false,
-        'split':false
+        'ready': false,
+        'hit': false,
+        'stay': false,
+        'double': false,
+        'split': false
     };
     alert: Object;
     username: String;
@@ -41,7 +42,7 @@ export class ViewComponent implements OnInit {
             this.socketService.connect();
 
             this.dataConnection = this.socketService.getDataUpdate().subscribe((data: any) => {
-                console.log('getDataUpdate',data);
+                console.log('getDataUpdate', data);
                 this.dealer = null;
                 this.players = [];
                 this.activePlay = data.activePlay;

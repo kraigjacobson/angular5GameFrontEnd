@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import * as io from 'socket.io-client/dist/socket.io.js';
 import { Observable } from 'rxjs/Observable';
-import {CookieService} from "ngx-cookie-service";
+import {CookieService} from 'ngx-cookie-service';
 
 
 @Injectable()
@@ -17,7 +17,7 @@ export class SocketService {
 
     connect() {
         if (!this.socket) {
-            let query = 'token=' + this.cookieService.get('token');
+            const query = 'token=' + this.cookieService.get('token');
             this.socket = io(this.url, {
                 query: query
             });
@@ -35,7 +35,7 @@ export class SocketService {
     }
 
     getMessages() {
-        let observable = new Observable(observer => {
+        const observable = new Observable(observer => {
             this.socket.on('message', (data) => {
                 observer.next(data);
             });
@@ -47,7 +47,7 @@ export class SocketService {
     }
 
     getDataUpdate() {
-        let observable = new Observable(observer => {
+        const observable = new Observable(observer => {
             this.socket.on('dataUpdate', (data) => {
                 observer.next(data);
             });
@@ -59,7 +59,7 @@ export class SocketService {
     }
 
     getInit() {
-        let observable = new Observable(observer => {
+        const observable = new Observable(observer => {
             this.socket.on('init', (data) => {
                 observer.next(data);
             });
@@ -71,7 +71,7 @@ export class SocketService {
     }
 
     getButtonUpdate() {
-        let observable = new Observable(observer => {
+        const observable = new Observable(observer => {
             this.socket.on('buttons', (data) => {
                 observer.next(data);
             });
@@ -83,7 +83,7 @@ export class SocketService {
     }
 
     getAlerts() {
-        let observable = new Observable(observer => {
+        const observable = new Observable(observer => {
             this.socket.on('alert', (data: String) => {
                 observer.next(data);
             });

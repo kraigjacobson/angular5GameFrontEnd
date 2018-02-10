@@ -17,7 +17,7 @@
             </div>
             <div [ngClass]="{'turn': player?.turn }">
                 <div class="row">
-                    <h1>{{player?.username}} {{player?.count}} turn: </h1>
+                    <h1>{{player?.username | capitalize}} {{player?.count}}</h1>
                 </div>
                 <div class="row">
                     <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
@@ -32,7 +32,7 @@
             <div *ngFor="let player of players; let i = index" class="col">
                 <div [ngClass]="{'turn': player?.turn }">
                     <div class="row">
-                        <h1>{{player?.username}} {{player?.count}} turn: {{player?.turn}}</h1>
+                        <h1>{{player?.username | capitalize}} {{player?.count}}</h1>
                     </div>
                     <div class="row">
                         <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"

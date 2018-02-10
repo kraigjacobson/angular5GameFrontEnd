@@ -13,15 +13,17 @@ import {ViewComponent} from './view/view.component';
 import {LoginComponent} from './login/login.component';
 
 import {SocketService} from './socket.service';
-import {UserService} from "./user.service";
+import {UserService} from './user.service';
 import { CookieService } from 'ngx-cookie-service';
+import {CapitalizePipe} from './pipes/capitalize.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         CommComponent,
         ViewComponent,
-        LoginComponent
+        LoginComponent,
+        CapitalizePipe
     ],
     imports: [
         BrowserModule,
