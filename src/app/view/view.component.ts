@@ -32,9 +32,7 @@ export class ViewComponent implements OnInit {
     activePlay = false;
 
 
-    constructor(private socketService: SocketService, private service: AlertCenterService, private userService: UserService) {
-
-    }
+    constructor(private socketService: SocketService, private alertService: AlertCenterService, private userService: UserService) {}
 
     ngOnInit() {
         this.sessionConnection = this.userService.getSession().subscribe((data: any) => {
@@ -47,7 +45,7 @@ export class ViewComponent implements OnInit {
                 this.players = [];
                 this.activePlay = data.activePlay;
                 for (let i = 0; i < data.players.length; i++) {
-                    let player = data.players[i];
+                    const player = data.players[i];
                     if (player) {
                         if (player.username === this.session.user.username) {
                             // this player
@@ -83,7 +81,7 @@ export class ViewComponent implements OnInit {
                 console.log(data);
                 console.log('alert', this.alert);
                 const alert = Alert.create((<any>AlertType)[data.type], data.message, 5000, false);
-                this.service.alert(alert);
+                this.alertService.alert(alert);
             });
 
 

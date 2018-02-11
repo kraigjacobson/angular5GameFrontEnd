@@ -9,3 +9,9 @@
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442; /* red */
 }
+
+.alert {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

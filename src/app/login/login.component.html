@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="alert my-alert-center-style">
+    <nac-alert-center [animation]="'fancy'" [htmlTextEnabled]="true"></nac-alert-center>
+  </div>
   <h1 class="text-center">Welcome to BlackJack</h1>
   <form #loginForm="ngForm">
     <div class="form-group">
@@ -32,7 +35,7 @@
       </select>
     </div>
 
-    <button type="submit" (click)="onRegister()" class="btn btn-success" name="register" [disabled]="!loginForm.form.valid">Register</button>
     <button type="submit" (click)="onLogin()" class="btn btn-info" name="login" [disabled]="!loginForm.form.valid">Login</button>
+    <button type="submit" (click)="onRegister()" class="btn btn-success" name="register" [disabled]="!loginForm.form.valid">Register</button>
   </form>
 </div>
