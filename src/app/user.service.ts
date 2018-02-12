@@ -28,7 +28,9 @@ export class UserService {
     }
 
     public register(user: User): Observable<any> {
-        return this.http.post<any>(this.url + '/register', {user: user});
+        return this.http.post<any>(this.url + '/register', {user: user}).pipe(
+            catchError(this.handleError<any>('register'))
+        );
     }
 
     public checkSession = () => {

@@ -22,10 +22,12 @@ export class LoginComponent implements OnInit {
     onRegister = () => {
         console.log(this.model);
         this.userService.register(this.model)
-            .subscribe((res: any) => {
+            .subscribe(res => {
                 if (res.success) {
-                    console.log(res);
                     this.onLogin();
+                } else {
+                    const alert = Alert.create((<any>AlertType)['DANGER'], res.error.error, 5000, false);
+                    this.alertService.alert(alert);
                 }
             });
     }
@@ -34,7 +36,6 @@ export class LoginComponent implements OnInit {
         console.log('logging in');
         this.userService.login(this.model)
             .subscribe(res => {
-                console.log('thing', res);
                 if (res.success) {
                     this.authorized.emit(true);
                 } else {
