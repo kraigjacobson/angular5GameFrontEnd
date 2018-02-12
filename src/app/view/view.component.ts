@@ -23,7 +23,8 @@ export class ViewComponent implements OnInit {
         'hit': false,
         'stay': false,
         'double': false,
-        'split': false
+        'split': false,
+        'buyIn': false
     };
     alert: Object;
     username: String;
@@ -50,11 +51,13 @@ export class ViewComponent implements OnInit {
                         if (player.username === this.session.user.username) {
                             // this player
                             this.player = player;
+                            console.log('player', player);
                         } else {
                             this.players.push(player);
                         }
                     }
                 }
+                console.log('this.player',this.player);
                 if (this.player.turn) {
                     this.buttons.hit = true;
                     this.buttons.stay = true;
@@ -122,5 +125,9 @@ export class ViewComponent implements OnInit {
 
     onClickSplit() {
         this.socketService.sendAction('split');
+    }
+
+    onClickBuyIn() {
+        this.socketService.sendAction('buyIn');
     }
 }
