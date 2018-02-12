@@ -15,6 +15,7 @@ $heart: 0px;
 $diamond: $card-height;
 $club: $card-height * 2 - 1px;
 $spade: $card-height * 3 - 1px;
+$back: $card-height * 4 - 1px;
 $two: 0px;
 $three: $card-width;
 $four: $card-width * 2;
@@ -62,6 +63,10 @@ input[type=number]::-webkit-inner-spin-button,
 .turn {
     //background-color: #d0e9c6;
     color: #79d27a;
+}
+
+.back {
+    background-position-y: $back;
 }
 
 .heart {
