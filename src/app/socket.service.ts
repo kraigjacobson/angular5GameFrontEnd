@@ -20,19 +20,42 @@ export class SocketService {
         if (!this.socket) {
             const query = 'token=' + this.cookieService.get('token');
             this.socket = io(this.url, {
-                query: query
+                query: query,
+                reconnection: false
             });
         }
     }
 
+    onConnect() {
+        const observable = new Observable(observer => {
+            this.socket.on('connect', (data) => {
+                observer.next(data);
+            });
+            return () => {
+                this.socket.disconnect();
+            };
+        });
+        return observable;
+    }
+
+    onDisconnect() {
+        const observable = new Observable(observer => {
+            this.socket.on('disconnect', (data) => {
+                observer.next(data);
+            });
+            return () => {
+                this.socket.disconnect();
+            };
+        });
+        return observable;
+    }
+
     sendMessage(message) {
         this.socket.emit('message', message);
-        console.log('message sent to server');
     }
 
     sendAction(action, data = null) {
         this.socket.emit(action, data);
-        console.log(`${action} sent to the server`);
     }
 
     getMessages() {

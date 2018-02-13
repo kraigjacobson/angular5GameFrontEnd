@@ -8,6 +8,7 @@ import {UserService} from "./user.service";
 })
 export class AppComponent {
   loggedIn = false;
+  disconnect = false;
 
   constructor (private userService: UserService) {
     if (userService.checkSession()) {
@@ -15,9 +16,14 @@ export class AppComponent {
     }
   }
 
-  authorized (allowed: boolean) {
+  authorized (state: boolean) {
     console.log('appcomponent');
-    this.loggedIn = allowed;
+    this.loggedIn = state;
+  }
+
+  disconnected (state: boolean) {
+    console.log('this.disconnect',this.disconnect);
+    this.disconnect = state;
   }
 
 

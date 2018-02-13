@@ -28,6 +28,9 @@
             <div class="row">
                 <h3>Cash: ${{player?.money}}</h3>
             </div>
+            <div class="row">
+                <h3>Bet: ${{player?.bet}}</h3>
+            </div>
         </div>
         <div class="col-6">
             <div *ngFor="let player of players; let i = index" class="col">
@@ -38,7 +41,9 @@
                     <div class="row">
                         <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
                              class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
-                        <h3>Cash: ${{player?.money}}</h3>
+                        <div class="row">
+                            <h3>Cash: ${{player?.money}} </h3><h3> | </h3><h3>Bet: ${{player?.bet}}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,5 +61,5 @@
     <button *ngIf="buttons.stay" (click)="onClickStay()">Stay</button>
     <button *ngIf="buttons.double" (click)="onClickDouble()">Double Down</button>
     <button *ngIf="buttons.split" (click)="onClickSplit()">Split</button>
-    <button *ngIf="buttons.buyIn" (click)="onClickBuyIn()">Buy In</button>
+    <button *ngIf="player?.money <5" (click)="onClickBuyIn()">Buy In</button>
 </div>

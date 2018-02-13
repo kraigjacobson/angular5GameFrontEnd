@@ -16,6 +16,7 @@ import {SocketService} from './socket.service';
 import {UserService} from './user.service';
 import { CookieService } from 'ngx-cookie-service';
 import {CapitalizePipe} from './pipes/capitalize.pipe';
+import { DisconnectedComponent } from './disconnected/disconnected.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import {CapitalizePipe} from './pipes/capitalize.pipe';
         CommComponent,
         ViewComponent,
         LoginComponent,
-        CapitalizePipe
+        CapitalizePipe,
+        DisconnectedComponent
     ],
     imports: [
         BrowserModule,
