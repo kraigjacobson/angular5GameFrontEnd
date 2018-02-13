@@ -35,6 +35,7 @@ export class ViewComponent implements OnInit {
     activePlay = false;
 
 
+
     constructor(private socketService: SocketService, private alertService: AlertCenterService, private userService: UserService) {}
 
     ngOnInit() {

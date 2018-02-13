@@ -7,7 +7,7 @@ import {CookieService} from 'ngx-cookie-service';
 @Injectable()
 
 export class SocketService {
-    private host = 'localhost';
+    private host = '10.126.1.183';
     private url = `http://${this.host}:3000`;
     public socket;
     public token;

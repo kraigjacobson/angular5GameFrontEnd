@@ -31,7 +31,7 @@ $king: $card-width * 11;
 $ace: $card-width * 12;
 
 #view {
-    height:50vh;
+    height:542px;
 }
 
 .alert {
@@ -39,7 +39,13 @@ $ace: $card-width * 12;
     top: 5px;
     right: 5px;
 }
-
+img {
+    height:100px;
+    width:100px;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-right:10px;
+}
 %card-base {
     width: 81px;
     height: 117px;

@@ -7,7 +7,7 @@
         <!--<h4>Click Ready to Begin</h4>-->
     <!--</div>-->
     <div class="row">
-        <div class="col-6">
+        <div class="col-5">
             <div class="row">
                 <h1>Dealer {{dealer?.count}}</h1>
             </div>
@@ -18,31 +18,35 @@
             </div>
             <div [ngClass]="{'turn': player?.turn }">
                 <div class="row">
-                    <h1>{{player?.username | capitalize}} {{player?.count}}</h1>
+                    <div class="col-3">
+                        <img class="rounded-circle" src="/assets/{{player?.image}}.jpg" alt="">
+                    </div>
+                    <div class="col-9">
+                        <h1>{{player?.username | capitalize}} {{player?.count}}</h1>
+                        <h3>Cash: ${{player?.money}} </h3><h4>Bet: ${{player?.bet}}</h4>
+                    </div>
                 </div>
                 <div class="row">
                     <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
                          class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
                 </div>
             </div>
-            <div class="row">
-                <h3>Cash: ${{player?.money}}</h3>
-            </div>
-            <div class="row">
-                <h3>Bet: ${{player?.bet}}</h3>
-            </div>
         </div>
-        <div class="col-6">
+        <div class="col-7">
             <div *ngFor="let player of players; let i = index" class="col">
                 <div [ngClass]="{'turn': player?.turn }">
+                    <div class="row"><h4>{{player?.username | capitalize}} Cash: ${{player?.money}} Bet: ${{player?.bet}} Total: {{player?.count}}</h4></div>
                     <div class="row">
-                        <h1>{{player?.username | capitalize}} {{player?.count}}</h1>
-                    </div>
-                    <div class="row">
-                        <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
-                             class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
-                        <div class="row">
-                            <h3>Cash: ${{player?.money}} </h3><h3> | </h3><h3>Bet: ${{player?.bet}}</h3>
+                        <div class="col-4">
+                            <img class="rounded-circle" src="/assets/{{player?.image}}.jpg" alt="">
+                        </div>
+                        <!--<div class="col-4">-->
+                            <!--<h4>{{player?.username | capitalize}} {{player?.count}}</h4>-->
+                            <!--<h5>Cash: ${{player?.money}} </h5><h5>Bet: ${{player?.bet}}</h5>-->
+                        <!--</div>-->
+                        <div class="col-8">
+                            <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
+                                 class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
                         </div>
                     </div>
                 </div>
