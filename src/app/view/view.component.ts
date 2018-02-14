@@ -17,6 +17,8 @@ export class ViewComponent implements OnInit {
     buttonConnection;
     alertConnection;
     initConnection;
+    messages = [];
+    message;
     dealer;
     player;
     players = [];
@@ -33,7 +35,12 @@ export class ViewComponent implements OnInit {
     bet = 5;
     session;
     activePlay = false;
-
+    time = 0;
+    timer;
+    config = {
+        'readyTime': 15,
+        'actionTime': 10
+    };
 
 
     constructor(private socketService: SocketService, private alertService: AlertCenterService, private userService: UserService) {}
@@ -60,11 +67,36 @@ export class ViewComponent implements OnInit {
                             }
                         }
                     }
+                    if (this.buttons.ready && !this.timer) {
+                        if (!this.timer) {
+                            this.time = this.config.readyTime;
+                            this.timer = setInterval(() => {
+                                if (!this.time) {
+                                    this.clearTimer();
+                                    this.disconnected.emit(true);
+                                } else {
+                                    this.time--;
+                                }
+                            },1000);
+                        }
+                    }
                     if (this.player.turn) {
                         this.buttons.hit = true;
                         this.buttons.stay = true;
-                        this.buttons.double = true;
-                        // this.buttons.split = true;
+                        if (this.player.money >= this.player.bet) {
+                            this.buttons.double = true;
+                        }
+                        if (!this.timer) {
+                            this.time = this.config.actionTime;
+                            this.timer = setInterval(() => {
+                                if (!this.time) {
+                                    this.clearTimer();
+                                    this.onClickStay();
+                                } else {
+                                    this.time--;
+                                }
+                            },1000);
+                        }
                     } else {
                         this.buttons.hit = false;
                         this.buttons.stay = false;
@@ -91,8 +123,17 @@ export class ViewComponent implements OnInit {
                     this.player = data;
                 });
 
+                this.socketService.getMessages().subscribe(message => {
+                    console.log(message);
+                    this.messages.push(message);
+                    if (this.messages.length > 7) {
+                        this.messages.shift();
+                    }
+                });
+
                 this.socketService.onDisconnect().subscribe((data: any) => {
                     this.disconnected.emit(true);
+                    this.socketService.socket.disconnect();
                 });
             });
         });
@@ -111,26 +152,43 @@ export class ViewComponent implements OnInit {
     }
 
     onClickReady() {
+        this.player.money -= this.player.bet;
+        this.clearTimer();
         this.socketService.sendAction('readyCheck', this.bet);
     }
 
     onClickHit() {
+        this.clearTimer();
         this.socketService.sendAction('hit');
     }
 
     onClickStay() {
+        this.clearTimer();
         this.socketService.sendAction('stay');
     }
 
     onClickDouble() {
+        this.clearTimer();
         this.socketService.sendAction('double');
     }
 
     onClickSplit() {
+        this.clearTimer();
         this.socketService.sendAction('split');
     }
 
     onClickBuyIn() {
         this.socketService.sendAction('buyIn');
+    }
+
+    clearTimer() {
+        clearInterval(this.timer);
+        this.time = null;
+        this.timer = null;
+    }
+
+    sendMessage(message: string) {
+        this.message = message;
+        this.socketService.sendMessage(message);
     }
 }

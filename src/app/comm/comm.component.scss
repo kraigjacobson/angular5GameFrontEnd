@@ -1,20 +1,2 @@
 :host {
-    display: block;
-    padding:5px;
-    margin:2px;
-    background-color: black;
-    color: white;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
-}
-#messages {
-    height: 30vh;
-    overflow-y: auto;
-}
-#chat-box {
-    input {
-        bottom:10px;
-        width: 100%
-    }
 }

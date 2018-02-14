@@ -1,10 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 html, body {
+  background-color: black !important;
+  color: white !important;
   overflow: hidden !important;
+  font-family: 'Bree Serif', serif !important;
 }
-body {
-  //background-image: url("assets/table.jpg");
-  //background-size:cover;
-  //background-position-y: -100px;
-  //background-repeat:no-repeat;
+
+@font-face {
+  font-family: 'Lounge';
+  src: url('/assets/lounge.ttf') format('truetype');
 }

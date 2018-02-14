@@ -19,11 +19,10 @@ export class CommComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('1');
-    this.userService.getSession().do(() => {
-      this.connection = this.socketService.getMessages().subscribe(message => {
-        this.messages.push(message);
-      })
+
+    this.socketService.onConnect().subscribe((data: any) => {
+
+
     });
   }
 

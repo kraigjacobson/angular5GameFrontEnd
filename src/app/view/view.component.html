@@ -1,69 +1,71 @@
-<div class="container" id="view">
-    <div class="alert my-alert-center-style">
-        <nac-alert-center [animation]="'fancy'" [htmlTextEnabled]="true"></nac-alert-center>
-    </div>
-    <!--<div class="text-center row">-->
-        <!--<h1>Welcome to Blackjack</h1>-->
-        <!--<h4>Click Ready to Begin</h4>-->
-    <!--</div>-->
-    <div class="row">
-        <div class="col-5">
-            <div class="row">
+<div class="row no-gutters">
+    <div class="col-9" id="table">
+        <div class="row">
+            <div class="col-6">
                 <h1>Dealer {{dealer?.count}}</h1>
-            </div>
-            <div class="row">
-                <div *ngFor="let card of dealer?.hand; let j = index" [attr.data-index]="j"
-                     class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
-                <div *ngIf="dealer?.hand.length === 1" class="card card-1 back two"></div>
-            </div>
-            <div [ngClass]="{'turn': player?.turn }">
-                <div class="row">
-                    <div class="col-3">
-                        <img class="rounded-circle" src="/assets/{{player?.image}}.jpg" alt="">
-                    </div>
-                    <div class="col-9">
-                        <h1>{{player?.username | capitalize}} {{player?.count}}</h1>
-                        <h3>Cash: ${{player?.money}} </h3><h4>Bet: ${{player?.bet}}</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
+                <div class="card-section">
+                    <div *ngFor="let card of dealer?.hand; let j = index" [attr.data-index]="j"
                          class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
+                    <div *ngIf="dealer?.hand.length === 1" class="card card-1 back two"></div>
                 </div>
-            </div>
-        </div>
-        <div class="col-7">
-            <div *ngFor="let player of players; let i = index" class="col">
                 <div [ngClass]="{'turn': player?.turn }">
-                    <div class="row"><h4>{{player?.username | capitalize}} Cash: ${{player?.money}} Bet: ${{player?.bet}} Total: {{player?.count}}</h4></div>
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <img class="rounded-circle" src="/assets/{{player?.image}}.jpg" alt="">
                         </div>
-                        <!--<div class="col-4">-->
-                            <!--<h4>{{player?.username | capitalize}} {{player?.count}}</h4>-->
-                            <!--<h5>Cash: ${{player?.money}} </h5><h5>Bet: ${{player?.bet}}</h5>-->
-                        <!--</div>-->
-                        <div class="col-8">
-                            <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
-                                 class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
+                        <div class="col-9">
+                            <h1>{{player?.username | capitalize}} <span *ngIf="player?.count">- {{player?.count}}</span> </h1>
+                            <h4>Cash: ${{player?.money}} | Bet: ${{player?.bet}} <span *ngIf="time">| <i class="fa fa-clock-o"></i></span> {{time}}</h4>
+                        </div>
+                    </div>
+                    <div class="card-section">
+                        <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
+                             class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
+                    </div>
+                    <div *ngIf="!activePlay" id="bet">
+                        <button (click)="onDecreaseBet()">-</button>
+                        <input [(ngModel)]="bet" type="number">
+                        <button (click)="onIncreaseBet()">+</button>
+                    </div>
+                    <div id="buttons">
+                        <button *ngIf="buttons.ready" (click)="onClickReady()">Ready</button>
+                        <button *ngIf="buttons.hit" (click)="onClickHit()">Hit</button>
+                        <button *ngIf="buttons.stay" (click)="onClickStay()">Stay</button>
+                        <button *ngIf="buttons.double" (click)="onClickDouble()">Double Down</button>
+                        <button *ngIf="buttons.split" (click)="onClickSplit()">Split</button>
+                        <button *ngIf="player?.money <5" (click)="onClickBuyIn()">Buy In</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert my-alert-center-style">
+                    <nac-alert-center [animation]="'fancy'" [htmlTextEnabled]="true"></nac-alert-center>
+                </div>
+                <div *ngFor="let player of players; let i = index" class="col">
+                    <div [ngClass]="{'turn': player?.turn }">
+                        <div class="row"><h4>{{player?.username | capitalize}} | Cash: ${{player?.money}} | Bet: ${{player?.bet}}<span *ngIf="player?.count"> | {{player?.count}}</span><span *ngIf="player?.ready"> | Ready</span></h4></div>
+                        <div class="row">
+                            <div class="col-4">
+                                <img class="rounded-circle" src="/assets/{{player?.image}}.jpg" alt="">
+                            </div>
+                            <div class="col-8 card-section">
+                                <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
+                                     class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div *ngIf="!activePlay" id="bet">
-    <button (click)="onDecreaseBet()">-</button>
-    <input [(ngModel)]="bet" type="number">
-    <button (click)="onIncreaseBet()">+</button>
-</div>
-<div id="buttons">
-    <button *ngIf="buttons.ready" (click)="onClickReady()">Ready</button>
-    <button *ngIf="buttons.hit" (click)="onClickHit()">Hit</button>
-    <button *ngIf="buttons.stay" (click)="onClickStay()">Stay</button>
-    <button *ngIf="buttons.double" (click)="onClickDouble()">Double Down</button>
-    <button *ngIf="buttons.split" (click)="onClickSplit()">Split</button>
-    <button *ngIf="player?.money <5" (click)="onClickBuyIn()">Buy In</button>
+    <div class="col" id="chat">
+        <div id="messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+            <div *ngFor="let message of messages">
+                <p>{{message}}</p>
+            </div>
+        </div>
+        <div id="chat-box">
+            <input #chatBox (keyup.enter)="sendMessage(chatBox.value); chatBox.value = ''">
+        </div>
+    </div>
 </div>

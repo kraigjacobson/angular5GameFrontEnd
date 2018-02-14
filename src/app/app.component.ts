@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {UserService} from "./user.service";
+import {SocketService} from "./socket.service";
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ export class AppComponent {
   loggedIn = false;
   disconnect = false;
 
-  constructor (private userService: UserService) {
+  constructor (private userService: UserService, private socketService: SocketService) {
     if (userService.checkSession()) {
       this.loggedIn = true;
     }

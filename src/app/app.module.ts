@@ -17,6 +17,7 @@ import {UserService} from './user.service';
 import { CookieService } from 'ngx-cookie-service';
 import {CapitalizePipe} from './pipes/capitalize.pipe';
 import { DisconnectedComponent } from './disconnected/disconnected.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import { DisconnectedComponent } from './disconnected/disconnected.component';
         NgbModule.forRoot(),
         AlertCenterModule,
         BrowserAnimationsModule,
-        FormsModule
+        FormsModule,
+        AngularFontAwesomeModule
     ],
     providers: [SocketService, AlertCenterService, UserService, CookieService],
     bootstrap: [AppComponent]

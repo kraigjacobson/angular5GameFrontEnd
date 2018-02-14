@@ -1,7 +1,6 @@
-<div class="container">
-  <!--<h1 class="text-center">Kraig's Casino</h1>-->
+<div class="container-fluid">
+  <h1 class="text-center" style="font-family: 'Lounge'; font-size: 80px">Kraig's Casino</h1>
   <app-view (disconnected)="disconnected($event)" *ngIf="loggedIn && !disconnect"></app-view>
-  <!--<app-comm *ngIf="loggedIn && !disconnect"></app-comm>-->
   <app-login (authorized)="authorized($event)" *ngIf="!loggedIn"></app-login>
   <app-disconnected *ngIf="loggedIn && disconnect"></app-disconnected>
 </div>

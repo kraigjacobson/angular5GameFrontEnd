@@ -1,13 +1,13 @@
 :host {
-    height: 65vh;
     display: block;
     padding:5px;
     margin:2px;
-    background-color: black;
+    background-image: url('/assets/table.jpg');
     color: white;
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
+    height:700px;
 }
 $card-height: -117px;
 $card-width: -81px;
@@ -30,14 +30,43 @@ $queen: $card-width * 10;
 $king: $card-width * 11;
 $ace: $card-width * 12;
 
-#view {
-    height:542px;
+#chat {
+    display: block;
+    padding:5px;
+    margin:2px;
+    background-color: black;
+    color: white;
+    -webkit-border-radius:3px;
+    -moz-border-radius:3px;
+    border-radius:3px;
+    height:685px;
+    #messages {
+        overflow-y: auto;
+    }
+    #chat-box {
+        input {
+            margin-left:-5px;
+            position: absolute;
+            bottom:5px;
+            width: 100%
+        }
+    }
+}
+#table {
+    padding-left:10px;
+    padding-right:10px;
+}
+.card-section {
+    min-height:117px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .alert {
     position: absolute;
     top: 5px;
     right: 5px;
+    z-index: 1000;
 }
 img {
     height:100px;
@@ -45,6 +74,7 @@ img {
     margin-top:10px;
     margin-bottom:10px;
     margin-right:10px;
+    border: 2px solid white;
 }
 %card-base {
     width: 81px;
@@ -65,10 +95,12 @@ input[type=number]::-webkit-inner-spin-button,
      -webkit-appearance: none;
      margin: 0;
  }
-
 .turn {
     //background-color: #d0e9c6;
-    color: #79d27a;
+    color: #34ff48;
+    img {
+        border-color: #34ff48;
+    }
 }
 
 .back {
