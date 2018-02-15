@@ -75,6 +75,7 @@ img {
     margin-bottom:10px;
     margin-right:10px;
     border: 2px solid white;
+    box-shadow: 3px 7px 3px rgba(0, 0, 0, 0.3)
 }
 %card-base {
     width: 81px;
@@ -85,6 +86,7 @@ img {
     @extend %card-base;
     background: url('/assets/cards.gif');
     float:left;
+    box-shadow: 3px 7px 3px rgba(0, 0, 0, 0.3)
 }
 input {
     text-align: center;
