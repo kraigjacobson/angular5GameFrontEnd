@@ -22,7 +22,7 @@
                         <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
                              class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
                     </div>
-                    <div *ngIf="!activePlay || !player?.ready" id="bet">
+                    <div *ngIf="!activePlay && !player?.ready" id="bet">
                         <button (click)="onDecreaseBet()">-</button>
                         <input [(ngModel)]="bet" type="number">
                         <button (click)="onIncreaseBet()">+</button>

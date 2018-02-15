@@ -38,7 +38,7 @@ export class ViewComponent implements OnInit {
     time = 0;
     timer;
     config = {
-        'readyTime': 15,
+        'readyTime': 150,
         'actionTime': 10
     };
 
@@ -57,49 +57,69 @@ export class ViewComponent implements OnInit {
                     this.dealer = null;
                     this.players = [];
                     this.activePlay = data.activePlay;
+                    let playerFound = false;
                     for (let i = 0; i < data.players.length; i++) {
                         const player = data.players[i];
                         if (player) {
                             if (player.username === this.session.user.username) {
                                 // this player
-                                this.player = player;
-                            } else {
-                                this.players.push(player);
+                                playerFound = true;
                             }
                         }
                     }
-                    if (this.buttons.ready && !this.timer) {
-                        if (!this.timer) {
-                            this.time = this.config.readyTime;
-                            this.timer = setInterval(() => {
-                                if (!this.time) {
-                                    this.clearTimer();
-                                    this.disconnected.emit(true);
-                                    this.socketService.disconnect();
+                    for (let i = 0; i < data.players.length; i++) {
+                        const player = data.players[i];
+                        if (player) {
+                            if (playerFound) {
+                                if (player.username === this.session.user.username) {
+                                    // this player
+                                    this.player = player;
                                 } else {
-                                    this.time--;
+                                    this.players.push(player);
                                 }
-                            },1000);
-                        }
-                    }
-                    if (this.player.turn) {
-                        this.buttons.hit = true;
-                        this.buttons.stay = true;
-                        if (!this.timer) {
-                            this.time = this.config.actionTime;
-                            this.timer = setInterval(() => {
-                                if (!this.time) {
-                                    this.clearTimer();
-                                    this.onClickStay();
+                                // player has a seat at the table
+
+                                if (this.buttons.ready && !this.timer) {
+                                    if (!this.timer) {
+                                        this.time = this.config.readyTime;
+                                        this.timer = setInterval(() => {
+                                            if (!this.time) {
+                                                this.clearTimer();
+                                                this.disconnected.emit(true);
+                                                this.socketService.disconnect();
+                                            } else {
+                                                this.time--;
+                                            }
+                                        },1000);
+                                    }
+                                }
+                                if (this.player.turn) {
+                                    this.buttons.hit = true;
+                                    this.buttons.stay = true;
+                                    if (!this.timer) {
+                                        this.time = this.config.actionTime;
+                                        this.timer = setInterval(() => {
+                                            if (!this.time) {
+                                                this.clearTimer();
+                                                this.onClickStay();
+                                            } else {
+                                                this.time--;
+                                            }
+                                        },1000);
+                                    }
                                 } else {
-                                    this.time--;
+                                    this.buttons.hit = false;
+                                    this.buttons.stay = false;
+                                    // this.buttons.split = false;
                                 }
-                            },1000);
+                            } else {
+                                if (i === 0) {
+                                    this.player = player;
+                                } else {
+                                    this.players.push(player);
+                                }
+                            }
                         }
-                    } else {
-                        this.buttons.hit = false;
-                        this.buttons.stay = false;
-                        // this.buttons.split = false;
                     }
                     this.dealer = data.dealer;
 
