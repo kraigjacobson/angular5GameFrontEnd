@@ -26,7 +26,7 @@ export class ViewComponent implements OnInit {
         'ready': false,
         'hit': false,
         'stay': false,
-        'double': false,
+        'double': true,
         'split': false,
         'buyIn': false
     };
@@ -38,7 +38,7 @@ export class ViewComponent implements OnInit {
     time = 0;
     timer;
     config = {
-        'readyTime': 15,
+        'readyTime': 10,
         'actionTime': 10
     };
 
@@ -53,6 +53,7 @@ export class ViewComponent implements OnInit {
             this.connect = this.socketService.onConnect().subscribe((data: any) => {
 
                 this.dataConnection = this.socketService.getDataUpdate().subscribe((data: any) => {
+                    console.log(data);
                     this.dealer = null;
                     this.players = [];
                     this.activePlay = data.activePlay;
@@ -74,6 +75,7 @@ export class ViewComponent implements OnInit {
                                 if (!this.time) {
                                     this.clearTimer();
                                     this.disconnected.emit(true);
+                                    this.socketService.disconnect();
                                 } else {
                                     this.time--;
                                 }
@@ -83,9 +85,6 @@ export class ViewComponent implements OnInit {
                     if (this.player.turn) {
                         this.buttons.hit = true;
                         this.buttons.stay = true;
-                        if (this.player.money >= this.player.bet) {
-                            this.buttons.double = true;
-                        }
                         if (!this.timer) {
                             this.time = this.config.actionTime;
                             this.timer = setInterval(() => {
@@ -100,10 +99,10 @@ export class ViewComponent implements OnInit {
                     } else {
                         this.buttons.hit = false;
                         this.buttons.stay = false;
-                        this.buttons.double = false;
                         // this.buttons.split = false;
                     }
                     this.dealer = data.dealer;
+
                 });
 
                 this.buttonConnection = this.socketService.getButtonUpdate().subscribe((data: any) => {
