@@ -133,7 +133,6 @@ export class ViewComponent implements OnInit {
 
                 this.socketService.onDisconnect().subscribe((data: any) => {
                     this.disconnected.emit(true);
-                    this.socketService.socket.disconnect();
                 });
             });
         });
