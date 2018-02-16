@@ -19,9 +19,11 @@ export class ViewComponent implements OnInit {
     initConnection;
     messages = [];
     message;
+    maxMessages = 16;
     dealer;
     player;
     players = [];
+    waitlist = [];
     buttons = {
         'ready': false,
         'hit': false,
@@ -41,6 +43,7 @@ export class ViewComponent implements OnInit {
         'readyTime': 150,
         'actionTime': 10
     };
+    spectator = false;
 
 
     constructor(private socketService: SocketService, private alertService: AlertCenterService, private userService: UserService) {}
@@ -53,76 +56,76 @@ export class ViewComponent implements OnInit {
             this.connect = this.socketService.onConnect().subscribe((data: any) => {
 
                 this.dataConnection = this.socketService.getDataUpdate().subscribe((data: any) => {
-                    console.log(data);
                     this.dealer = null;
                     this.players = [];
+                    this.waitlist = data.waitlist;
                     this.activePlay = data.activePlay;
-                    let playerFound = false;
-                    for (let i = 0; i < data.players.length; i++) {
-                        const player = data.players[i];
-                        if (player) {
-                            if (player.username === this.session.user.username) {
-                                // this player
-                                playerFound = true;
+                    // see if user is in the player array else
+                    if (this.isPlaying(data)) {
+                        // player is seated
+                        this.spectator = false;
+                        for (let i = 0; i < data.players.length; i++) {
+                            let player = data.players[i];
+                            if (player.id == this.session.user.id) {
+
+                                // put this player in the main slot
+                                this.player = player;
+                            } else {
+                                // fill up the other player slots
+                                this.players.push(player);
                             }
                         }
-                    }
-                    for (let i = 0; i < data.players.length; i++) {
-                        const player = data.players[i];
-                        if (player) {
-                            if (playerFound) {
-                                if (player.username === this.session.user.username) {
-                                    // this player
-                                    this.player = player;
-                                } else {
-                                    this.players.push(player);
-                                }
-                                // player has a seat at the table
 
-                                if (this.buttons.ready && !this.timer) {
-                                    if (!this.timer) {
-                                        this.time = this.config.readyTime;
-                                        this.timer = setInterval(() => {
-                                            if (!this.time) {
-                                                this.clearTimer();
-                                                this.disconnected.emit(true);
-                                                this.socketService.disconnect();
-                                            } else {
-                                                this.time--;
-                                            }
-                                        },1000);
+                        // player has a seat at the table
+
+                        if (this.buttons.ready && !this.timer) {
+                            if (!this.timer) {
+                                this.time = this.config.readyTime;
+                                this.timer = setInterval(() => {
+                                    if (!this.time) {
+                                        this.clearTimer();
+                                        this.disconnected.emit(true);
+                                        this.socketService.disconnect();
+                                    } else {
+                                        this.time--;
                                     }
-                                }
-                                if (this.player.turn) {
-                                    this.buttons.hit = true;
-                                    this.buttons.stay = true;
-                                    if (!this.timer) {
-                                        this.time = this.config.actionTime;
-                                        this.timer = setInterval(() => {
-                                            if (!this.time) {
-                                                this.clearTimer();
-                                                this.onClickStay();
-                                            } else {
-                                                this.time--;
-                                            }
-                                        },1000);
+                                },1000);
+                            }
+                        }
+                        if (this.player.turn) {
+                            this.buttons.hit = true;
+                            this.buttons.stay = true;
+                            if (!this.timer) {
+                                this.time = this.config.actionTime;
+                                this.timer = setInterval(() => {
+                                    if (!this.time) {
+                                        this.clearTimer();
+                                        this.onClickStay();
+                                    } else {
+                                        this.time--;
                                     }
-                                } else {
-                                    this.buttons.hit = false;
-                                    this.buttons.stay = false;
-                                    // this.buttons.split = false;
-                                }
+                                },1000);
+                            }
+                        } else {
+                            this.buttons.hit = false;
+                            this.buttons.stay = false;
+                            // this.buttons.split = false;
+                        }
+                    } else {
+                        // player is in waitlist
+                        this.spectator = true;
+                        for (let i = 0; i < data.players.length; i++) {
+                            let player = data.players[i];
+                            if (data.players[0]) {
+                                // put the first in array into the main slot
+                                this.player = player;
                             } else {
-                                if (i === 0) {
-                                    this.player = player;
-                                } else {
-                                    this.players.push(player);
-                                }
+                                // fill up the other player slots
+                                this.players.push(player);
                             }
                         }
                     }
                     this.dealer = data.dealer;
-
                 });
 
                 this.buttonConnection = this.socketService.getButtonUpdate().subscribe((data: any) => {
@@ -143,9 +146,8 @@ export class ViewComponent implements OnInit {
                 });
 
                 this.socketService.getMessages().subscribe(message => {
-                    console.log(message);
                     this.messages.push(message);
-                    if (this.messages.length > 7) {
+                    if (this.messages.length > this.maxMessages) {
                         this.messages.shift();
                     }
                 });
@@ -209,4 +211,15 @@ export class ViewComponent implements OnInit {
         this.message = message;
         this.socketService.sendMessage(message);
     }
+
+    isPlaying = (data) => {
+        for (let i = 0; i < data.players.length; i++) {
+            const player = data.players[i];
+            if (player) {
+                if (player.id == this.session.user.id) {
+                    return true;
+                }
+            }
+        }
+    };
 }

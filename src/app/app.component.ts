@@ -23,7 +23,6 @@ export class AppComponent {
   }
 
   disconnected (state: boolean) {
-    console.log('this.disconnect',this.disconnect);
     this.disconnect = state;
   }
 
