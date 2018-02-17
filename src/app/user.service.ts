@@ -15,7 +15,7 @@ export class UserService {
         this.token = this.cookieService.get('token');
     }
 
-    private host = '10.126.1.183';
+    private host = window.location.hostname;
     private url = `http://${this.host}:3000`;
     public login (user: User): Observable<any> {
         return this.http.post<any>(this.url + '/login', user).pipe(
