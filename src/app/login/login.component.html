@@ -8,6 +8,7 @@
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name"
              required
+             [attr.maxlength]="10"
              [(ngModel)]="model.username" name="name"
              #name="ngModel">
       <div [hidden]="name.valid || name.pristine"
@@ -20,6 +21,7 @@
       <label for="pwd">Password</label>
       <input type="password" class="form-control" id="pwd"
              required
+             [attr.maxlength]="10"
              [(ngModel)]="model.password" name="password"
              #password="ngModel">
       <div [hidden]="password.valid || password.pristine"

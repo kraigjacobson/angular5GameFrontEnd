@@ -1,5 +1,6 @@
 <div class="row no-gutters">
     <div class="col-9" id="table">
+        <div *ngIf="spectator" class="alert alert-warning alert-center">Spectator Mode</div>
         <div class="row">
             <div class="col-6">
                 <h1>Dealer {{dealer?.count}}</h1>
@@ -22,19 +23,25 @@
                         <div *ngFor="let card of player?.hand; let j = index" [attr.data-index]="j"
                              class="card {{card?.name}} {{card?.suite}} {{'card-'+j}}"></div>
                     </div>
-                    <div *ngIf="!activePlay" id="bet">
+                    <div *ngIf="!activePlay && !player?.ready && !spectator" id="bet">
                         <button (click)="onDecreaseBet()">-</button>
                         <input [(ngModel)]="bet" type="number">
                         <button (click)="onIncreaseBet()">+</button>
                     </div>
-                    <div id="buttons">
+                    <div *ngIf="!spectator" id="buttons">
                         <button *ngIf="buttons.ready" (click)="onClickReady()">Ready</button>
                         <button *ngIf="buttons.hit" (click)="onClickHit()">Hit</button>
                         <button *ngIf="buttons.stay" (click)="onClickStay()">Stay</button>
-                        <button *ngIf="buttons.double" (click)="onClickDouble()">Double Down</button>
+                        <button *ngIf="!player?.hit && player?.turn" (click)="onClickDouble()">Double Down</button>
                         <button *ngIf="buttons.split" (click)="onClickSplit()">Split</button>
                         <button *ngIf="player?.money <5" (click)="onClickBuyIn()">Buy In</button>
                     </div>
+                </div>
+                <div *ngIf="waitlist.length" class="col-4" id="waitlist">
+                    <h4>Waitlist</h4>
+                    <ul *ngFor="let player of waitlist; let i = index">
+                        <li>{{player?.username | capitalize}}</li>
+                    </ul>
                 </div>
             </div>
             <div class="col-6">
@@ -43,7 +50,7 @@
                 </div>
                 <div *ngFor="let player of players; let i = index" class="col">
                     <div [ngClass]="{'turn': player?.turn }">
-                        <div class="row"><h4>{{player?.username | capitalize}} | Cash: ${{player?.money}} | Bet: ${{player?.bet}}<span *ngIf="player?.count"> | {{player?.count}}</span><span *ngIf="player?.ready"> | Ready</span></h4></div>
+                        <div class="row"><h4><i *ngIf="player?.ready && !activePlay" class="fa fa-check"></i> {{player?.username | capitalize}} | Cash: ${{player?.money}} | Bet: ${{player?.bet}}<span *ngIf="player?.count"> | {{player?.count}}</span></h4></div>
                         <div class="row">
                             <div class="col-4">
                                 <img class="rounded-circle" src="/assets/{{player?.image}}.jpg" alt="">
@@ -61,11 +68,18 @@
     <div class="col" id="chat">
         <div id="messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
             <div *ngFor="let message of messages">
-                <p>{{message}}</p>
+                <p>{{message | capitalize}}</p>
             </div>
         </div>
-        <div id="chat-box">
-            <input #chatBox (keyup.enter)="sendMessage(chatBox.value); chatBox.value = ''">
+        <div class="no-gutters" id="chat-box">
+            <div class="row">
+                <div class="col-1">
+                    <i class="fa fa-comment" id="chat-icon"></i>
+                </div>
+                <div class="col">
+                    <input #chatBox (keyup.enter)="sendMessage(chatBox.value); chatBox.value = ''">
+                </div>
+            </div>
         </div>
     </div>
 </div>

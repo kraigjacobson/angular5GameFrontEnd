@@ -1,14 +1,15 @@
 :host {
-    display: block;
-    padding:5px;
-    margin:2px;
-    background-image: url('/assets/table.jpg');
-    color: white;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
-    height:700px;
+  display: block;
+  padding: 5px;
+  margin: 2px;
+  background-image: url('/assets/table.jpg');
+  color: white;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  height: 700px;
 }
+
 $card-height: -117px;
 $card-width: -81px;
 $heart: 0px;
@@ -31,178 +32,238 @@ $king: $card-width * 11;
 $ace: $card-width * 12;
 
 #chat {
-    display: block;
-    padding:5px;
-    margin:2px;
-    background-color: black;
-    color: white;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
-    height:685px;
-    #messages {
-        overflow-y: auto;
+  display: block;
+  padding: 5px;
+  margin: 2px;
+  background-color: black;
+  color: white;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  height: 685px;
+  #messages {
+    overflow-y: auto;
+  }
+  #chat-box {
+    position: absolute;
+    bottom: 5px;
+    width:100%;
+    input {
+      width:100%;
+      text-align: left;
+      padding-left:3px;
     }
-    #chat-box {
-        input {
-            margin-left:-5px;
-            position: absolute;
-            bottom:5px;
-            width: 100%
-        }
+    #chat-icon {
+      color: red;
     }
+  }
 }
+
 #table {
-    padding-left:10px;
-    padding-right:10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
+
 .card-section {
-    min-height:117px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  min-height: 117px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .alert {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 1000;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  z-index: 1000;
+  &.alert-center {
+    right: 41%;
+  }
 }
+
 img {
-    height:100px;
-    width:100px;
-    margin-top:10px;
-    margin-bottom:10px;
-    margin-right:10px;
-    border: 2px solid white;
+  height: 100px;
+  width: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  border: 2px solid white;
+  box-shadow: 3px 7px 3px rgba(0, 0, 0, 0.3)
 }
+
 %card-base {
-    width: 81px;
-    height: 117px;
+  width: 81px;
+  height: 117px;
 }
 
 .card {
-    @extend %card-base;
-    background: url('/assets/cards.gif');
-    float:left;
+  @extend %card-base;
+  background: url('/assets/cards.gif');
+  float: left;
+  box-shadow: 3px 7px 3px rgba(0, 0, 0, 0.3)
 }
-input {
-    text-align: center;
-    width:70px;
-}
+
 input[type=number]::-webkit-inner-spin-button,
- input[type=number]::-webkit-outer-spin-button {
-     -webkit-appearance: none;
-     margin: 0;
- }
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .turn {
-    //background-color: #d0e9c6;
-    color: #34ff48;
-    img {
-        border-color: #34ff48;
-    }
+  //background-color: #d0e9c6;
+  color: #34ff48;
+  img {
+    border-color: #34ff48;
+  }
+}
+#waitlist {
+  margin-top:15px;
+  background-color: white;
+  color:black;
+  padding:10px;
+  border-radius:5px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  li {
+    list-style: none;
+  }
 }
 
 .back {
-    background-position-y: $back;
+  background-position-y: $back;
 }
 
 .heart {
-    background-position-y: $heart;
+  background-position-y: $heart;
 }
+
 .diamond {
-    background-position-y: $diamond;
+  background-position-y: $diamond;
 }
+
 .club {
-    background-position-y: $club;
+  background-position-y: $club;
 }
+
 .spade {
-    background-position-y: $spade;
+  background-position-y: $spade;
 }
+
 .two {
-    background-position-x: $two;
+  background-position-x: $two;
 }
+
 .three {
-    background-position-x: $three;
+  background-position-x: $three;
 }
+
 .four {
-    background-position-x: $four;
+  background-position-x: $four;
 }
+
 .five {
-    background-position-x: $five;
+  background-position-x: $five;
 }
+
 .six {
-    background-position-x: $six;
+  background-position-x: $six;
 }
+
 .seven {
-    background-position-x: $seven;
+  background-position-x: $seven;
 }
+
 .eight {
-    background-position-x: $eight;
+  background-position-x: $eight;
 }
+
 .nine {
-    background-position-x: $nine;
+  background-position-x: $nine;
 }
+
 .ten {
-    background-position-x: $ten;
+  background-position-x: $ten;
 }
+
 .jack {
-    background-position-x: $jack;
+  background-position-x: $jack;
 }
+
 .queen {
-    background-position-x: $queen;
+  background-position-x: $queen;
 }
+
 .king {
-    background-position-x: $king;
+  background-position-x: $king;
 }
+
 .ace {
-    background-position-x: $ace;
+  background-position-x: $ace;
 }
+
 .card-1 {
-    left: -50px;
+  left: -50px;
 }
+
 .card-2 {
-    left: -100px;
+  left: -100px;
 }
+
 .card-3 {
-    left: -150px;
+  left: -150px;
 }
+
 .card-4 {
-    left: -200px;
+  left: -200px;
 }
+
 .card-5 {
-    left: -390px;
-    bottom: -60px;
+  left: -390px;
+  bottom: -60px;
 }
+
 .card-6 {
-    left: -435px;
-    bottom: -60px;
+  left: -435px;
+  bottom: -60px;
 }
+
 .card-7 {
-    left: -480px;
-    bottom: -60px;
+  left: -480px;
+  bottom: -60px;
 }
+
 .card-8 {
-    left: -515px;
-    bottom: -60px;
+  left: -515px;
+  bottom: -60px;
 }
+
 .card-9 {
-    left: -550px;
-    bottom: -60px;
+  left: -550px;
+  bottom: -60px;
 }
+
 .card-10 {
-    left: -585px;
-    bottom: -60px;
+  left: -585px;
+  bottom: -60px;
 }
+
 .card-11 {
-    left: -530px;
-    bottom: -60px;
+  left: -530px;
+  bottom: -60px;
 }
+
 #buttons {
-    position: relative;
-    bottom: 0;
-    right: 0;
+  position: relative;
+  bottom: 0;
+  right: 0;
 }
+
 #bet {
-    margin-bottom:5px;
+  margin-bottom: 5px;
+  input {
+    text-align: center;
+    width: 70px;
+  }
 }

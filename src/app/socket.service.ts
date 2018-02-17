@@ -51,7 +51,13 @@ export class SocketService {
     }
 
     sendMessage(message) {
+        console.log(message);
         this.socket.emit('message', message);
+    }
+
+    disconnect() {
+        console.log('disconnect');
+        this.socket.disconnect();
     }
 
     sendAction(action, data = null) {
