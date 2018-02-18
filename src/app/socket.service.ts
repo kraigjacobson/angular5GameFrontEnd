@@ -9,7 +9,8 @@ import {CookieService} from 'ngx-cookie-service';
 export class SocketService {
     private host = window.location.hostname;
     // private url = `http://${this.host}:3001`; // for local development
-    private url = `https://${this.host}/blackjackserver`;
+    // private url = `https://${this.host}/blackjackserver`;
+    private url = 'https://krjacobson.com/blackjackserver/';
     public socket;
     public token;
 
