@@ -40,7 +40,7 @@ export class ViewComponent implements OnInit {
     time = 0;
     timer;
     config = {
-        'readyTime': 150,
+        'readyTime': 15,
         'actionTime': 10
     };
     spectator = false;

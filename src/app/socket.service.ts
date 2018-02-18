@@ -8,7 +8,7 @@ import {CookieService} from 'ngx-cookie-service';
 
 export class SocketService {
     private host = window.location.hostname;
-    private url = `http://${this.host}:3000`;
+    private url = `http://${this.host}:3001`;
     public socket;
     public token;
 
