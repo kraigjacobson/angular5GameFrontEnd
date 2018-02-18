@@ -21,6 +21,7 @@ export class SocketService {
         if (!this.socket) {
             const query = 'token=' + this.cookieService.get('token');
             this.socket = io(this.url, {
+                path: '/blackjackserver/socket.io',
                 query: query,
                 reconnection: false
             });
