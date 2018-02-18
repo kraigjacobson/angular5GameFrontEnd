@@ -16,7 +16,7 @@ export class UserService {
     }
 
     private host = window.location.hostname;
-    private url = `http://${this.host}:3001`;
+    private url = `https://${this.host}:3001`;
     public login (user: User): Observable<any> {
         return this.http.post<any>(this.url + '/login', user).pipe(
             tap(res => {
