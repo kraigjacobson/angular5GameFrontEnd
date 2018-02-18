@@ -9,7 +9,7 @@ import {CookieService} from 'ngx-cookie-service';
 export class SocketService {
     private host = window.location.hostname;
     // private url = `http://${this.host}:3001`; // for local development
-    private url = `https://${this.host}/blackjackserver`;
+    private url = `https://${this.host}`;
     public socket;
     public token;
 
@@ -21,7 +21,7 @@ export class SocketService {
         if (!this.socket) {
             const query = 'token=' + this.cookieService.get('token');
             this.socket = io(this.url, {
-                path: '/blackjackserver/socket.io',
+                resource: '/blackjackserver/socket.io',
                 query: query,
                 reconnection: false
             });
