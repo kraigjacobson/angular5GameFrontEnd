@@ -17,7 +17,7 @@ export class UserService {
 
     private host = window.location.hostname;
     // private url = `http://${this.host}:3001`; // for local development
-    private url = `https://${this.host}/blackjackserver`;
+    private url = `https://blackjackapi.kraig.io`;
     public login (user: User): Observable<any> {
         return this.http.post<any>(this.url + '/login', user).pipe(
             tap(res => {
