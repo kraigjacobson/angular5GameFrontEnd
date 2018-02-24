@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
                 if (res.success) {
                     this.onLogin();
                 } else {
-                    const alert = Alert.create((<any>AlertType)['DANGER'], res.error.error, 5000, false);
+                    const alert = Alert.create((<any>AlertType)['DANGER'], res.error.error.message, 5000, false);
                     this.alertService.alert(alert);
                 }
             });
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
                 if (res.success) {
                     this.authorized.emit(true);
                 } else {
-                    const alert = Alert.create((<any>AlertType)['DANGER'], res.error.error, 5000, false);
+                    const alert = Alert.create((<any>AlertType)['DANGER'], res.error.error.message, 5000, false);
                     this.alertService.alert(alert);
                 }
             });
