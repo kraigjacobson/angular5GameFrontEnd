@@ -71,13 +71,13 @@
                 <p>{{message | capitalize}}</p>
             </div>
         </div>
-        <div class="no-gutters" id="chat-box">
-            <div class="row">
-                <div class="col-1">
-                    <i class="fa fa-comment" id="chat-icon"></i>
-                </div>
-                <div class="col">
-                    <input #chatBox (keyup.enter)="sendMessage(chatBox.value); chatBox.value = ''">
+        <div id="chat-box">
+            <div class="row no-gutters">
+                <div class="col-12">
+                    <input placeholder="Write messege..."
+                           #chatBox (keyup.enter)="sendMessage(chatBox.value);
+                           chatBox.value = ''"
+                           [attr.maxlength]="500">
                 </div>
             </div>
         </div>
