@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
                 if (res.success) {
                     this.onLogin();
                 } else {
+                    console.log('res', res);
                     const alert = Alert.create((<any>AlertType)['DANGER'], res.error.error.message, 5000, false);
                     this.alertService.alert(alert);
                 }
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
                 if (res.success) {
                     this.authorized.emit(true);
                 } else {
+                    console.log('res', res);
                     const alert = Alert.create((<any>AlertType)['DANGER'], res.error.error.message, 5000, false);
                     this.alertService.alert(alert);
                 }
