@@ -19,7 +19,6 @@ export class ViewComponent implements OnInit {
     initConnection;
     messages = [];
     message;
-    maxMessages = 16;
     dealer;
     player;
     players = [];
@@ -147,9 +146,6 @@ export class ViewComponent implements OnInit {
 
                 this.socketService.getMessages().subscribe(message => {
                     this.messages.push(message);
-                    if (this.messages.length > this.maxMessages) {
-                        this.messages.shift();
-                    }
                 });
 
                 this.socketService.onDisconnect().subscribe((data: any) => {
